@@ -28,8 +28,9 @@ var lengthOfLastWord = function (s) {
     return lastWordLength
 };
 
-// expected to return "5"
-console.log("Length of Last Word: ", lengthOfLastWord("hello world"))
+// expected to return "5 & 4"
+console.log("58. Length of Last Word: ", lengthOfLastWord("hello world"))
+console.log("58. Length of Last Word: ", lengthOfLastWord("  fly me moon  "))
 
 
 /////////////////////////////////
@@ -50,7 +51,7 @@ function firstNonRepeatingLetter(s) {
 }
 
 // expected to return "t"
-console.log(firstNonRepeatingLetter("sTRess"))
+console.log("KYU 5. first non-repeating char:", firstNonRepeatingLetter("sTRess"))
 
 
 ///////////////////////////////////
@@ -67,18 +68,38 @@ console.log(firstNonRepeatingLetter("sTRess"))
 // Explanation: Mary is the tallest, followed by Emma and John.
 
 var sortPeople = function (names, heights) {
+    // store the names and heights in a list as value in an object
+    // sort them by height
+    // return the names as an array
+
+    // list of people
     let people = []
+
+    // loop through names array
     for (let i = 0; i < names.length; i++) {
+        // temp object that will be used to push to array
         let temp = {}
+
+        // store name and height as key:value pairs
         temp["name"] = names[i]
         temp["height"] = heights[i]
+
+        // push to add object to array
         people.push(temp)
     }
+
     // console.log(people)
+
+    // sort by DESCENDING height
     people.sort((a, b) => b.height - a.height)
+
     // console.log("sort", people)
+
+    // array of names in descending height order
     let desOrder = []
 
+    // loop through people object which has the list of objects [{}, {}, {}, ...]
+    // push their names into "desOrder"
     for (let i = 0; i < people.length; i++) {
         desOrder.push(people[i].name)
     }
@@ -86,4 +107,56 @@ var sortPeople = function (names, heights) {
     return desOrder
 };
 
-console.log(sortPeople(["Mary", "John", "Emma"], [180, 165, 170]))
+console.log("2418. Sort by height:", sortPeople(["Mary", "John", "Emma"], [180, 165, 170]))
+
+
+//////////////////////
+// 1. Two Sum (EASY)
+//////////////////////
+
+// Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+// You may assume that each input would have exactly one solution, and you may not use the same element twice.
+// You can return the answer in any order.
+
+// Example 1:
+
+// Input: nums = [2,7,11,15], target = 9
+// Output: [0,1]
+// Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+// Example 2:
+
+// Input: nums = [3,2,4], target = 6
+// Output: [1,2]
+
+var twoSum = function (nums, target) {
+    // loop through array and assign each index to a "temp" value
+    // nested loop to iterate at index 1 higher than "temp"
+    // check if adding "temp" and nested loop index of nums gets target sum
+    // if it does return indicies
+    
+    // hold indexes that sum to target
+    let twoSum = []
+
+    // loop through index
+    for (let i = 0; i < nums.length; i++) {
+
+        // temporarily assign first addend
+        temp = nums[i]
+
+        // loop through array starting at index one higher than first addend to find second number
+        for (let j = i + 1; j < nums.length; j++) {
+
+            // if sum is equal to target
+            if (temp + nums[j] === target) {
+
+                // push the indexes into twoSum array and return it
+                twoSum.push(i)
+                twoSum.push(j)
+                return twoSum
+            }
+        }
+    }
+};
+
+// expected [1, 2]
+console.log("1. Two Sum", twoSum([3,2,4], 6))
