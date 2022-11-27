@@ -10,7 +10,6 @@
 // Output: 4
 // Explanation: The last word is "moon" with length 4.
 
-s = "Hello World"
 // s = "   fly me   to   the moon  "
 
 var lengthOfLastWord = function (s) {
@@ -29,7 +28,9 @@ var lengthOfLastWord = function (s) {
     return lastWordLength
 };
 
-console.log("Length of Last Word: ", lengthOfLastWord(s))
+// expected to return "5"
+console.log("Length of Last Word: ", lengthOfLastWord("hello world"))
+
 
 /////////////////////////////////
 // CODEWARS - KYU 5
@@ -48,4 +49,41 @@ function firstNonRepeatingLetter(s) {
     return ""
 }
 
+// expected to return "t"
 console.log(firstNonRepeatingLetter("sTRess"))
+
+
+///////////////////////////////////
+// 2418. Length of Last Word (EASY)
+///////////////////////////////////
+
+// You are given an array of strings names, and an array heights that consists of distinct positive integers. Both arrays are of length n.
+// For each index i, names[i] and heights[i] denote the name and height of the ith person.
+// Return names sorted in descending order by the people's heights.
+
+// Example 1:
+// Input: names = ["Mary","John","Emma"], heights = [180,165,170]
+// Output: ["Mary","Emma","John"]
+// Explanation: Mary is the tallest, followed by Emma and John.
+
+var sortPeople = function (names, heights) {
+    let people = []
+    for (let i = 0; i < names.length; i++) {
+        let temp = {}
+        temp["name"] = names[i]
+        temp["height"] = heights[i]
+        people.push(temp)
+    }
+    // console.log(people)
+    people.sort((a, b) => b.height - a.height)
+    // console.log("sort", people)
+    let desOrder = []
+
+    for (let i = 0; i < people.length; i++) {
+        desOrder.push(people[i].name)
+    }
+
+    return desOrder
+};
+
+console.log(sortPeople(["Mary", "John", "Emma"], [180, 165, 170]))
