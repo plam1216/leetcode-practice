@@ -12,7 +12,7 @@
 
 // s = "   fly me   to   the moon  "
 
-var lengthOfLastWord = function (s) {
+let lengthOfLastWord = (s) => {
     // split the string by ' ' to get each word
     // this returns an array
     let strArr = s.split(' ')
@@ -37,7 +37,7 @@ console.log("58. Length of Last Word: ", lengthOfLastWord("  fly me moon  "))
 // CODEWARS - KYU 5
 // FIRST NON-REPEATING CHARACTER
 /////////////////////////////////
-function firstNonRepeatingLetter(s) {
+let firstNonRepeatingLetter = (s) => {
     // convert string to lowercase
     let sLower = s.toLowerCase()
 
@@ -52,7 +52,7 @@ function firstNonRepeatingLetter(s) {
 
 // expected to return "t"
 console.log("KYU 5. first non-repeating char:", firstNonRepeatingLetter("sTRess"))
-
+console.log()
 
 ///////////////////////////////////
 // 2418. Length of Last Word (EASY)
@@ -67,7 +67,7 @@ console.log("KYU 5. first non-repeating char:", firstNonRepeatingLetter("sTRess"
 // Output: ["Mary","Emma","John"]
 // Explanation: Mary is the tallest, followed by Emma and John.
 
-var sortPeople = function (names, heights) {
+let sortPeople = (names, heights) => {
     // store the names and heights in a list as value in an object
     // sort them by height
     // return the names as an array
@@ -107,8 +107,8 @@ var sortPeople = function (names, heights) {
     return desOrder
 };
 
-console.log("2418. Sort by height:", sortPeople(["Mary", "John", "Emma"], [180, 165, 170]))
-
+console.log("Sort by height:", sortPeople(["Mary", "John", "Emma"], [180, 165, 170]))
+console.log()
 
 //////////////////////
 // 1. Two Sum (EASY)
@@ -128,7 +128,7 @@ console.log("2418. Sort by height:", sortPeople(["Mary", "John", "Emma"], [180, 
 // Input: nums = [3,2,4], target = 6
 // Output: [1,2]
 
-var twoSum = function (nums, target) {
+let twoSum = (nums, target) => {
     // loop through array and assign each index to a "temp" value
     // nested loop to iterate at index 1 higher than "temp"
     // check if adding "temp" and nested loop index of nums gets target sum
@@ -159,8 +159,8 @@ var twoSum = function (nums, target) {
 };
 
 // expected [1, 2]
-console.log("1. Two Sum", twoSum([3, 2, 4], 6))
-
+console.log("Two Sum: [3, 2, 4], 6", twoSum([3, 2, 4], 6))
+console.log()
 
 ////////////////////////////////////////
 // 121. Best Time to Sell a Stock (EASY)
@@ -208,8 +208,9 @@ var maxProfit = function (prices) {
     return profit
 };
 
-console.log(maxProfit([7, 1, 5, 3, 6, 4]))
-console.log(maxProfit([7, 6, 5, 4, 3, 1]))
+console.log("Max Profit [7, 1, 5, 3, 6, 4]", maxProfit([7, 1, 5, 3, 6, 4]))
+console.log("Max Profit [7, 6, 5, 4, 3, 1]", maxProfit([7, 6, 5, 4, 3, 1]))
+console.log()
 
 ////////////////////////////////
 // 125. Valid Palindrome (EASY)
@@ -233,19 +234,19 @@ console.log(maxProfit([7, 6, 5, 4, 3, 1]))
 let isPalindrome = (s) => {
     // change all letters in starting array to lowercase and split into individual characters
     let sArr = s.toLowerCase().split('')
-    
+
     // empty array to hold valid characters
     let palArr = []
 
     // loop through sArr to get valid characters
-    for(let i = 0; i < s.length; i++) {
+    for (let i = 0; i < s.length; i++) {
         // if it is a letter between 'a' and 'z' push to array
-        if(sArr[i].charCodeAt(0) >= 97 && sArr[i].charCodeAt(0) <= 122) {
+        if (sArr[i].charCodeAt(0) >= 97 && sArr[i].charCodeAt(0) <= 122) {
             palArr.push(sArr[i])
         }
 
         // if it is a valid number between '0' and '9' push to array
-        if(sArr[i].charCodeAt(0) >= 48 && sArr[i].charCodeAt(0) <= 57) {
+        if (sArr[i].charCodeAt(0) >= 48 && sArr[i].charCodeAt(0) <= 57) {
             palArr.push(sArr[i])
         }
     }
@@ -260,5 +261,79 @@ let isPalindrome = (s) => {
     return word === palWord
 };
 
-console.log(isPalindrome("A man, a plan, a canal: Panama"))
-console.log(isPalindrome("race a car"))
+console.log("A man, a plan, a canal: Panama", isPalindrome("A man, a plan, a canal: Panama"))
+console.log("race a car", isPalindrome("race a car"))
+console.log()
+
+/////////////////////////////
+// 242. Valid Anagram (EASY)
+/////////////////////////////
+
+// Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+// An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+// Example 1:
+// Input: s = "anagram", t = "nagaram"
+// Output: true
+
+// Example 2:
+// Input: s = "rat", t = "car"
+// Output: false
+
+let isAnagram = (s, t) => {
+    // anagrams should contain the same exact letters using original letters exactly once
+    // split string into individual letters, sort them alphabetically, and join the letters
+    // see if the two words are the same
+    return s.split('').sort().join('') === t.split('').sort().join('')
+}
+
+console.log("isAnagram? anagram, nagaram", isAnagram("anagram", "nagaram"))
+console.log()
+
+//////////////////////////////
+// 49. Group Anagrams (MEDIUM)
+//////////////////////////////
+
+// Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+
+// An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+// Example 1:
+// Input: strs = ["eat","tea","tan","ate","nat","bat"]
+// Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+
+// Example 2:
+// Input: strs = [""]
+// Output: [[""]]
+
+// Example 3:
+// Input: strs = ["a"]
+// Output: [["a"]]
+
+let groupAnagrams = (strs) => {
+    // object to store sorted words
+    // each word will be comparaed to the sorted word to see if it is an anagram
+    let anagramObj = {};
+
+    // loop through array of words
+    for (let i = 0; i < strs.length; i++) {
+        // sortedWord is each word in strs array sorted alphabeticalaly
+        let sortedWord = strs[i].split('').sort().join('');
+
+        // if sortedWord exists in anagramObj, push the word to that key's array
+        if (anagramObj[sortedWord]) {
+            anagramObj[sortedWord].push(strs[i])
+        } else {
+        // if the key doesn't exist, add the word in an array and add the key:value pair to anagramObj
+            anagramObj[sortedWord] = [strs[i]]
+        }
+    }
+
+    return Object.values(anagramObj)
+};
+
+console.log(groupAnagrams(["eat","tea","tan","ate","nat","bat"]))
+console.log(groupAnagrams([""]))
+console.log(groupAnagrams(["a"]))
+console.log()
