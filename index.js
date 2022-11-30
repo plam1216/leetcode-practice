@@ -402,3 +402,57 @@ var isValid = function (s) {
 console.log("()[]{}", isValid("()[]{}"))
 console.log("(}", isValid("(}"))
 console.log()
+
+
+/////////////////////////////////////////////
+// 1207. Unique Number of Occurrences (EASY)
+/////////////////////////////////////////////
+
+// Given an array of integers arr, return true if the number of occurrences of each value in the array is unique, or false otherwise.
+
+// Example 1:
+// Input: arr = [1,2,2,1,1,3]
+// Output: true
+// Explanation: The value 1 has 3 occurrences, 2 has 2 and 3 has 1. No two values have the same number of occurrences.
+
+// Example 2:
+// Input: arr = [1,2]
+// Output: false
+
+// Example 3:
+// Input: arr = [-3,0,1,-3,1,1,1,-3,10,0]
+// Output: true
+
+let uniqueOccurrences = (arr) => {
+    // keep track of number of occurences
+    let count = {}
+
+    // loop through array
+    for (let i = 0; i < arr.length; i++) {
+        // if key already exists in count
+        if (count[arr[i]]) {
+            // increment by +
+            count[arr[i]]++
+        } else {
+            // else it is the first occurence so create the key:value pair
+            count[arr[i]] = 1
+        }
+    }
+
+    // get the values of "count"; this returns an array
+    let keyVals = Object.values(count)
+
+    // turn the array into a set; this eliminates duplicates
+    let valSet = new Set(keyVals)
+
+    // if length of the array values is equal to set size there are no duplicates
+    if (keyVals.length === valSet.size) {
+        return true
+    } else {
+        // otherwise duplicates were removed when creating the set so the sizes are different
+        return false
+    }
+};
+
+console.log("[1,2,2,1,1,3]", uniqueOccurrences([1, 2, 2, 1, 1, 3]))
+console.log()
