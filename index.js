@@ -325,7 +325,7 @@ let groupAnagrams = (strs) => {
         if (anagramObj[sortedWord]) {
             anagramObj[sortedWord].push(strs[i])
         } else {
-        // if the key doesn't exist, add the word in an array and add the key:value pair to anagramObj
+            // if the key doesn't exist, add the word in an array and add the key:value pair to anagramObj
             anagramObj[sortedWord] = [strs[i]]
         }
     }
@@ -333,7 +333,72 @@ let groupAnagrams = (strs) => {
     return Object.values(anagramObj)
 };
 
-console.log(groupAnagrams(["eat","tea","tan","ate","nat","bat"]))
+console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))
 console.log(groupAnagrams([""]))
 console.log(groupAnagrams(["a"]))
+console.log()
+
+////////////////////////////////
+// 20. Valid Parentheses (EASY)
+////////////////////////////////
+
+// Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+// An input string is valid if:
+// Open brackets must be closed by the same type of brackets.
+// Open brackets must be closed in the correct order.
+// Every close bracket has a corresponding open bracket of the same type.
+
+// Example 1:
+// Input: s = "()"
+// Output: true
+
+// Example 2:
+// Input: s = "()[]{}"
+// Output: true
+
+// Example 3:
+// Input: s = "(]"
+// Output: false
+
+var isValid = function (s) {
+    // stack to keep track of brackets
+    let arr = []
+
+    // bracket pairs, if next bracket is closing, prev bracket should be opening
+    let brackets = {
+        ')': '(',
+        ']': '[',
+        '}': '{',
+    }
+
+    // loop through bracket string
+    for (let i = 0; i < s.length; i++) {
+        // if the char is a closing bracket
+        if (brackets[s[i]]) {
+            // check if the last bracket in stack is equal to closing bracket's value pair
+            if (arr[arr.length - 1] === brackets[s[i]]) {
+                // there is a match, pop (remove) the last item in arr
+                arr.pop()
+            } else {
+                // no match, add it to the stack
+                arr.push(s[i])
+            }
+        } else {
+            // the char is not a closing bracket, add to the stack
+            arr.push(s[i])
+        }
+    }
+
+    // check the size of the stack
+    // if it is 0 return true (all opening brackets have a closed bracket pair)
+    if (arr.length === 0) {
+        return true
+    } else {
+        return false
+    }
+};
+
+console.log("()[]{}", isValid("()[]{}"))
+console.log("(}", isValid("(}"))
 console.log()
