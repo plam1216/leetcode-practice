@@ -493,3 +493,40 @@ let numIdenticalPairs = (nums) => {
 console.log("numIdenticalPairs([1, 2, 3, 1, 1, 3]):", numIdenticalPairs([1, 2, 3, 1, 1, 3]))
 console.log("numIdenticalPairs([1, 2, 3, 1, 1, 3]):", numIdenticalPairs([1, 1, 1, 1]))
 console.log()
+
+
+///////////////////////////////////////
+// 1480. Running Sum of 1d Array (EASY)
+///////////////////////////////////////
+
+// Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
+// Return the running sum of nums.
+
+// Example 1:
+// Input: nums = [1,2,3,4]
+// Output: [1,3,6,10]
+// Explanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4].
+
+// Example 2:
+// Input: nums = [1,1,1,1,1]
+// Output: [1,2,3,4,5]
+// Explanation: Running sum is obtained as follows: [1, 1+1, 1+1+1, 1+1+1+1, 1+1+1+1+1].
+
+let runningSum = (nums) => {
+    // array to hold solution
+    let arr = []
+
+    // store first value
+    arr[0] = nums[0]
+
+    // loop through array
+    // arr[i] is equal to the sum of the previous arr index and current nums index
+    for (let i = 1; i < nums.length; i++) {
+        arr[i] = nums[i] + arr[i - 1]
+    }
+
+    return arr
+};
+
+console.log("[1,2,3,4]", runningSum([1, 2, 3, 4]))
+console.log("[1,1,1,1]", runningSum([1, 1, 1, 1]))
