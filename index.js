@@ -548,7 +548,7 @@ console.log()
 // For example, "cab" can be written as "-.-..--...", which is the concatenation of "-.-.", ".-", and "-...". We will call such a concatenation the transformation of a word.
 // Return the number of different transformations among all words we have.
 
- 
+
 
 // Example 1:
 // Input: words = ["gin","zen","gig","msg"]
@@ -564,10 +564,10 @@ console.log()
 // Input: words = ["a"]
 // Output: 1
 
-let uniqueMorseRepresentations =  (words) => {
+let uniqueMorseRepresentations = (words) => {
     // morseCode alphabet
     let morseCode = [".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."]
-    
+
     // keep track of converted word
     let convertedWord = ""
 
@@ -583,10 +583,10 @@ let uniqueMorseRepresentations =  (words) => {
             // add converted letter to empty string convertedWord
             convertedWord += morseCode[index]
         }
-            // add the convertedWord to the convertedWords array
-            convertedWords.push(convertedWord)
-            // reset convertedWord to an empty string for next iteration of loop
-            convertedWord = ""
+        // add the convertedWord to the convertedWords array
+        convertedWords.push(convertedWord)
+        // reset convertedWord to an empty string for next iteration of loop
+        convertedWord = ""
     }
 
     // turn convertedWords into a Set; eliminates duplicates
@@ -596,6 +596,52 @@ let uniqueMorseRepresentations =  (words) => {
     return numTransformations.size
 };
 
-console.log('["gin","zen","gig","msg"]', uniqueMorseRepresentations(["gin","zen","gig","msg"]))
+console.log('["gin","zen","gig","msg"]', uniqueMorseRepresentations(["gin", "zen", "gig", "msg"]))
 console.log('["a"]', uniqueMorseRepresentations(["a"]))
+console.log()
+
+
+////////////////////
+// Same Tree (EASY)
+////////////////////
+// Definition for a binary tree node
+class TreeNode {
+    constructor(val, left, right) {
+        this.val = (val === undefined ? 0 : val);
+        this.left = (left === undefined ? null : left);
+        this.right = (right === undefined ? null : right);
+    }
+}
+// CANNOT do new TreeNode(1, 2, 3) because it will just assign the INTEGER 2 to this.left and INTEGER 3 to this.right
+
+// create root node
+let p = new TreeNode(1, new TreeNode(2), new TreeNode(3))
+
+// repeat for second tree
+let q = new TreeNode(1, new TreeNode(2), new TreeNode(3))
+
+let isSameTree = (p, q) => {
+    // if the trees are both null, they are the same
+    if (p === null && q === null) {
+        return true
+    }
+
+    // if one of the trees is not null, they are not the same
+    if (p === null || q === null) {
+        return false
+    }
+
+    // if p.val equals q.val, run isSameTree again for the left and right nodes
+    // until it has iterated through all nodes
+    // if all nodes are equal it will stop at the first conditional
+    // meaning it is true
+    if (p.val === q.val) {
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+    }
+
+    // p.val does not equal q.val and neither are null
+    return false
+};
+
+console.log("[1,2,3]", isSameTree(p, q))
 console.log()
