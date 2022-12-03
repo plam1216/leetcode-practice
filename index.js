@@ -645,3 +645,54 @@ let isSameTree = (p, q) => {
 
 console.log("[1,2,3]", isSameTree(p, q))
 console.log()
+
+
+
+/////////////////////////////
+// 101. Symmetric Tree (EASY)
+/////////////////////////////
+
+// Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+// Example 1:
+// Input: root = [1,2,2,3,4,4,3]
+// Output: true
+
+// Example 2:
+// Input: root = [1,2,2,null,3,null,3]
+// Output: false
+
+// class TreeNode {
+//     constructor(val, left, right) {
+//         this.val = (val === undefined ? 0 : val);
+//         this.left = (left === undefined ? null : left);
+//         this.right = (right === undefined ? null : right);
+//     }
+// }
+
+let root = new TreeNode(1, new TreeNode(2), new TreeNode(2), new TreeNode(3), new TreeNode(4), new TreeNode(4), new TreeNode(3))
+// why doesn't left.left print?
+// console.log(root)
+
+let symmetryCheck = (left, right) => {
+    //  if both nodes are null they are equal
+    if (left === null && right === null) return true
+
+    //  if only one node is null, they are not equal
+    if (left === null || right === null) return false
+
+    // if the node values are not equal
+    if (left.val !== right.val) return false
+
+    // recursive function, check if the next set of nodes are equal
+    // keep running until nodes are either both null or not equal
+    return symmetryCheck(left.left, right.right) && symmetryCheck(left.right, right.left)
+}
+
+let isSymmetric = (root) => {
+    if (root === null) return true
+
+    return symmetryCheck(root.left, root.right)
+};
+
+console.log("[1, 2, 2, 3, 4, 4, 3]", isSymmetric(root))
+console.log()
