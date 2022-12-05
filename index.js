@@ -696,3 +696,62 @@ let isSymmetric = (root) => {
 
 console.log("[1, 2, 2, 3, 4, 4, 3]", isSymmetric(root))
 console.log()
+
+
+/////////////////////////////////////////
+// 876. Middle of the Linked List (EASY)
+/////////////////////////////////////////
+
+// Given the head of a singly linked list, return the middle node of the linked list.
+// If there are two middle nodes, return the second middle node.
+
+// Example 1:
+// Input: head = [1,2,3,4,5]
+// Output: [3,4,5]
+// Explanation: The middle node of the list is node 3.
+
+// Example 2:
+// Input: head = [1,2,3,4,5,6]
+// Output: [4,5,6]
+// Explanation: Since the list has two middle nodes with values 3 and 4, we return the second one.
+
+
+// Definition for singly-linked list.
+function ListNode(val, next) {
+    this.val = (val === undefined ? 0 : val)
+    this.next = (next === undefined ? null : next)
+}
+
+// List Node [1 -> 2 -> 3 -> 4 -> 5]
+let head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))))
+
+let middleNode = (head) => {
+    // temp to keep track of nodes
+    let temp = head;
+
+    // counter to find node size
+    let nodeSize = 0;
+
+    // while temp isn't null, increase counter and go to the next node
+    while (temp != null) {
+        nodeSize++
+        temp = temp.next
+    }
+
+    // find middle of node list by dividing by two; prompt says round up if it is odd size
+    let middle = Math.ceil(nodeSize / 2)
+    let middleNode = head
+
+    // loop through nodeList, decrement nodeSize by 1 until it equals 'middle' size
+    // this gives the resulting middle node
+    while (nodeSize != middle) {
+        middleNode = middleNode.next
+        nodeSize--
+    }
+
+    // console.log(middleNode)
+    return middleNode
+};
+
+console.log("[1, 2, 3, 4, 5]", middleNode(head))
+console.log()
