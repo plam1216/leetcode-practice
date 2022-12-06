@@ -745,7 +745,7 @@ let middleNode = (head) => {
     // loop through nodeList, decrement nodeSize by 1 until it equals 'middle' size
     // this gives the resulting middle node
     // [1, 2, 3, 4, 5] => middle = 3
-    
+
     // 5 != 3... 4 != 3... 3 != 3 --- break loop
     while (nodeSize != middle) {
         // 1 -> 2... 2 -> 3
@@ -776,3 +776,68 @@ let middleNode = (head) => {
 
 console.log("[1, 2, 3, 4, 5]", middleNode(head))
 console.log()
+
+
+///////////////////////////////////////////////////////////////
+// 2190. Most Frequent Number Following Key In an Array (EASY)
+///////////////////////////////////////////////////////////////
+// You are given a 0-indexed integer array nums. You are also given an integer key, which is present in nums.
+
+// For every unique integer target in nums, count the number of times target immediately follows an occurrence of key in nums. In other words, count the number of indices i such that:
+
+// 0 <= i <= nums.length - 2,
+// nums[i] == key and,
+// nums[i + 1] == target.
+// Return the target with the maximum count. The test cases will be generated such that the target with maximum count is unique.
+
+// Example 1:
+// Input: nums = [1,100,200,1,100], key = 1
+// Output: 100
+// Explanation: For target = 100, there are 2 occurrences at indices 1 and 4 which follow an occurrence of key.
+// No other integers follow an occurrence of key, so we return 100.
+
+// Example 2:
+// Input: nums = [2,2,2,2,3], key = 2
+// Output: 2
+// Explanation: For target = 2, there are 3 occurrences at indices 1, 2, and 3 which follow an occurrence of key.
+// For target = 3, there is only one occurrence at index 4 which follows an occurrence of key.
+// target = 2 has the maximum number of occurrences following an occurrence of key, so we return 2.
+
+let mostFrequent = (nums, key) => {
+    let tracker = {}
+
+    // loop through array
+    for (let i = 0; i < nums.length; i++) {
+
+        // does the value after i exist?
+        if (nums[i + 1]) {
+
+            // is [i] === key?
+            // if 1 === 1
+            if (nums[i] === key) {
+
+                // if key:value '100' exists in 'tracker'
+                if (tracker[nums[i + 1]]) {
+                    // increment the key:value
+                    tracker[nums[i + 1]]++
+
+                } else {
+                    // else if it doesn't exist in 'tracker' add the key:value pair
+                    tracker[nums[i + 1]] = 1
+                }
+            }
+        }
+    }
+
+    // get an array of the keys
+    let keys = Object.keys(tracker);
+
+    // sort by using the keys to lookup the values in the original object:
+    keys.sort((a, b) => tracker[a] - tracker[b]);
+
+    // console.log(keys);
+    return keys[keys.length - 1]
+};
+
+console.log("[1, 100, 200, 1, 100]", mostFrequent([1, 100, 200, 1, 100], 1))
+console.log("[2, 2, 2, 2, 3]", mostFrequent([2, 2, 2, 2, 3], 2))
