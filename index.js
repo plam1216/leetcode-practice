@@ -809,12 +809,12 @@ let mostFrequent = (nums, key) => {
     // loop through array
     for (let i = 0; i < nums.length; i++) {
 
-        // does the value after i exist?
-        if (nums[i + 1]) {
+        // is [i] === key?
+        // if 1 === 1
+        if (nums[i] === key) {
 
-            // is [i] === key?
-            // if 1 === 1
-            if (nums[i] === key) {
+            // does the value after i exist?
+            if (nums[i + 1]) {
 
                 // if key:value '100' exists in 'tracker'
                 if (tracker[nums[i + 1]]) {
@@ -839,5 +839,99 @@ let mostFrequent = (nums, key) => {
     return keys[keys.length - 1]
 };
 
-console.log("[1, 100, 200, 1, 100]", mostFrequent([1, 100, 200, 1, 100], 1))
-console.log("[2, 2, 2, 2, 3]", mostFrequent([2, 2, 2, 2, 3], 2))
+console.log("Most Frequent Target After Key: [1, 100, 200, 1, 100]", mostFrequent([1, 100, 200, 1, 100], 1))
+console.log("Most Frequent Target After Key: [2, 2, 2, 2, 3]", mostFrequent([2, 2, 2, 2, 3], 2))
+console.log()
+
+/////////////////////////////
+// 136. Single Number (EASY)
+/////////////////////////////
+
+// Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+// You must implement a solution with a linear runtime complexity and use only constant extra space.
+
+// Example 1:
+// Input: nums = [2,2,1]
+// Output: 1
+
+// Example 2:
+// Input: nums = [4,1,2,1,2]
+// Output: 4
+
+// Example 3:
+// Input: nums = [1]
+// Output: 1
+
+let singleNumber = (nums) => {
+    let map = {}
+
+    for (let i = 0; i < nums.length; i++) {
+        map[nums[i]] ? map[nums[i]]++ : map[nums[i]] = 1
+    }
+
+    for (num in map) {
+        if (map[num] === 1) {
+            return num
+        }
+    }
+};
+
+console.log("Single Num in Array: [4, 1, 2, 1, 2]", singleNumber([4, 1, 2, 1, 2]))
+console.log()
+
+
+/////////////////////////////////
+// 141. Linked List Cycle (EASY)
+/////////////////////////////////
+// Given head, the head of a linked list, determine if the linked list has a cycle in it.
+// There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
+// Return true if there is a cycle in the linked list. Otherwise, return false.
+
+// Example 1:
+// Input: head = [3,2,0,-4], pos = 1
+// Output: true
+// Explanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
+
+// Example 2:
+// Input: head = [1,2], pos = 0
+// Output: true
+// Explanation: There is a cycle in the linked list, where the tail connects to the 0th node.
+
+// Example 3:
+// Input: head = [1], pos = -1
+// Output: false
+// Explanation: There is no cycle in the linked list.
+
+
+// Definition for singly - linked list.
+function ListNode(val) {
+    this.val = val;
+    this.next = null;
+}
+
+let head1 = new ListNode(new ListNode(3))
+head1.next = new ListNode(2)
+head1.next.next = new ListNode(0)
+head1.next.next.next = new ListNode(-4)
+head1.next.next.next.next = head1.next
+
+
+let hasCycle = (head) => {
+    let fast = head
+    let slow = head
+
+    while (fast) {
+        if (!fast.next) {
+            return false
+        } else {
+            fast = fast.next.next
+            slow = slow.next
+        }
+
+        if (fast === slow) return true
+    }
+
+    return false
+};
+
+console.log("Linked List Cycle, [3, 0, 2, -4]", hasCycle(head1))
