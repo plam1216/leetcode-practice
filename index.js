@@ -935,3 +935,43 @@ let hasCycle = (head) => {
 };
 
 console.log("Linked List Cycle, [3, 0, 2, -4]", hasCycle(head1))
+console.log()
+
+// 70. Climbing Stairs (EASY)
+// You are climbing a staircase. It takes n steps to reach the top.
+// Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+// Example 1:
+// Input: n = 2
+// Output: 2
+// Explanation: There are two ways to climb to the top.
+// 1. 1 step + 1 step
+// 2. 2 steps
+
+// Example 2:
+// Input: n = 3
+// Output: 3
+// Explanation: There are three ways to climb to the top.
+// 1. 1 step + 1 step + 1 step
+// 2. 1 step + 2 steps
+// 3. 2 steps + 1 step
+
+let climbStairs = (n) => {
+    // Fibonacci Seq -> [0, 1, 1, 2, 3, 5, 8...]
+    let prev = 0
+    let curr = 1
+    let temp
+
+    for(let i = 0; i < n; i++) {
+        temp = prev
+        prev = curr
+        curr += temp
+    }
+
+    return curr
+}
+
+console.log("n=2; expect 2", climbStairs(2))
+console.log("n=3; expect 3", climbStairs(3))
+console.log("n=5; expect 8", climbStairs(5))
+console.log()
