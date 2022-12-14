@@ -1002,10 +1002,60 @@ console.log()
 let maxDepthRoot = new TreeNode(3, new TreeNode(9), new TreeNode(20, new TreeNode(15), new TreeNode(7)))
 
 let maxDepth = (root) => {
+    // if root exists...
     if (root) {
+        // get the max between the root.left & root.right
+        //      3
+        //     9 20
+        //       15 7
+
+        // when root = null, max(null, null) => max(0, 0)
         return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1
     }
     return 0
 };
 
-console.log("[3,9,20,null,null,15,7], expect :3", maxDepth(maxDepthRoot))
+console.log("[3,9,20,null,null,15,7], expect: 3", maxDepth(maxDepthRoot))
+console.log()
+
+
+/////////////////////////////////
+// 226. Invert Binary Tree (EASY)
+/////////////////////////////////
+// Given the root of a binary tree, invert the tree, and return its root.
+
+// Example 1:
+// Input: root = [4,2,7,1,3,6,9]
+// Output: [4,7,2,9,6,3,1]
+
+// Example 2:
+// Input: root = [2,1,3]
+// Output: [2,3,1]
+
+// Example 3:
+// Input: root = []
+// Output: []
+
+// function TreeNode(val, left, right) {
+//     this.val = (val === undefined ? 0 : val)
+//     this.left = (left === undefined ? null : left)
+//     this.right = (right === undefined ? null : right)
+// }
+
+let treeToInvert = new TreeNode(4, new TreeNode(2, new TreeNode(1), new TreeNode(3)), new TreeNode(7, new TreeNode(6), new TreeNode(9)))
+
+let invertTree = (root) => {
+    if (root !== null) {
+        temp = root.left
+        root.left = root.right
+        root.right = temp
+        invertTree(root.left)
+        invertTree(root.right)
+    }
+
+    return root
+};
+
+console.log("tree", treeToInvert)
+console.log("inverted tree", invertTree(treeToInvert))
+console.log()
