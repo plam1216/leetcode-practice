@@ -962,7 +962,7 @@ let climbStairs = (n) => {
     let curr = 1
     let temp
 
-    for(let i = 0; i < n; i++) {
+    for (let i = 0; i < n; i++) {
         temp = prev
         prev = curr
         curr += temp
@@ -975,3 +975,37 @@ console.log("n=2; expect 2", climbStairs(2))
 console.log("n=3; expect 3", climbStairs(3))
 console.log("n=5; expect 8", climbStairs(5))
 console.log()
+
+
+///////////////////////////////////////////
+// 104. Maximum Depth of Binary Tree (EASY)
+///////////////////////////////////////////
+// Given the root of a binary tree, return its maximum depth.
+
+// A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+// Example 1:
+// Input: root = [3,9,20,null,null,15,7]
+// Output: 3
+
+// Example 2:
+// Input: root = [1,null,2]
+// Output: 2
+
+//  Definition for a binary tree node.
+// function TreeNode(val, left, right) {
+//     this.val = (val === undefined ? 0 : val)
+//     this.left = (left === undefined ? null : left)
+//     this.right = (right === undefined ? null : right)
+// }
+
+let maxDepthRoot = new TreeNode(3, new TreeNode(9), new TreeNode(20, new TreeNode(15), new TreeNode(7)))
+
+let maxDepth = (root) => {
+    if (root) {
+        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1
+    }
+    return 0
+};
+
+console.log("[3,9,20,null,null,15,7], expect :3", maxDepth(maxDepthRoot))
