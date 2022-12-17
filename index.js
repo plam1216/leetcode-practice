@@ -601,9 +601,9 @@ console.log('["a"]', uniqueMorseRepresentations(["a"]))
 console.log()
 
 
-////////////////////
-// Same Tree (EASY)
-////////////////////
+/////////////////////////
+// 100. Same Tree (EASY)
+/////////////////////////
 // Definition for a binary tree node
 class TreeNode {
     constructor(val, left, right) {
@@ -643,9 +643,8 @@ let isSameTree = (p, q) => {
     return false
 };
 
-console.log("[1,2,3]", isSameTree(p, q))
+console.log("Same Tree? [1,2,3]", isSameTree(p, q))
 console.log()
-
 
 
 /////////////////////////////
@@ -1059,3 +1058,24 @@ let invertTree = (root) => {
 console.log("tree", treeToInvert)
 console.log("inverted tree", invertTree(treeToInvert))
 console.log()
+
+
+///////////////////////////////////////////////////////////
+// 2114. Maximum Number of Words Found in Sentences (EASY)
+///////////////////////////////////////////////////////////
+// A sentence is a list of words that are separated by a single space with no leading or trailing spaces.
+
+// You are given an array of strings sentences, where each sentences[i] represents a single sentence.
+
+// Return the maximum number of words that appear in a single sentence.
+let mostWordsFound = (sentences) => {
+    let wordCount = []
+
+    sentences.forEach(sentence => wordCount.push(sentence.split(' ').length))
+
+    return Math.max(...wordCount)
+};
+
+sentences = ["alice and bob love leetcode", "i think so too", "this is great thanks very much"]
+
+console.log("Most word in sentences:", mostWordsFound(sentences))
